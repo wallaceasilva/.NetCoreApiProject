@@ -27,12 +27,9 @@ namespace BackendApiProject.Controllers
 
         // GET: api/Arquivo
         [HttpGet]
-        //public async Task<ActionResult<IEnumerable<Arquivo>>> GetArquivos()
-        public IEnumerable<Arquivo> GetArquivos()
+        public async Task<ActionResult<IEnumerable<Arquivo>>> GetArquivos()
         {
-            //return await _context.Arquivos.ToListAsync();
-
-            return _context.Arquivos.OrderByDescending(p => p.Id);
+            return await _context.Arquivos.ToListAsync();
         }
 
         // GET: api/Arquivo/5
@@ -88,40 +85,15 @@ namespace BackendApiProject.Controllers
 
         // POST: api/Arquivo
         [HttpPost]
-        public async Task<IActionResult> PostArquivo([FromBody] Arquivo arquivo,
-            [ModelBinder(BinderType = typeof(JsonModelBinder))] Arquivo arq, IList<IFormFile> files)
+        public async Task<IActionResult> PostArquivo([FromBody] Arquivo arquivo)
         {
-            Arquivo teste;
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            foreach (var file in files)
-            {
-                if (file.Length > 0)
-                {
-                    byte[] fileBytes; 
-                    using (var ms = new MemoryStream())
-                    {
-                        file.CopyTo(ms);
-                        fileBytes = ms.ToArray();
-                        //string s = Convert.ToBase64String(fileBytes);
-                        // act on the Base64 data
-                    }
-                    teste = new Arquivo
-                    {
-                        Id = arq.Id,
-                        Nome = arq.Nome,
-                        DtCriacao = arq.DtCriacao,
-                        File = fileBytes
-                    };
-
-                    _dRep.Add(teste);
-                    var vCommit = await _dRep.SaveAsync(teste);
-                }
-            }
+            _dRep.Add(arquivo);
+            var vCommit = await _dRep.SaveAsync(arquivo);
 
             /*_context.Arquivos.Add(arquivo);
             await _context.SaveChangesAsync();*/
