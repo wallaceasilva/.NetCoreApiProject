@@ -1,0 +1,13 @@
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\bin\Debug\netcoreapp2.1\BackendApiProject.deps.json
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\bin\Debug\netcoreapp2.1\BackendApiProject.runtimeconfig.json
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\bin\Debug\netcoreapp2.1\BackendApiProject.runtimeconfig.dev.json
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\bin\Debug\netcoreapp2.1\BackendApiProject.dll
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\obj\Debug\netcoreapp2.1\BackendApiProject.csproj.CoreCompileInputs.cache
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\obj\Debug\netcoreapp2.1\BackendApiProject.RazorAssemblyInfo.cache
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\obj\Debug\netcoreapp2.1\BackendApiProject.RazorAssemblyInfo.cs
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\obj\Debug\netcoreapp2.1\BackendApiProject.AssemblyInfoInputs.cache
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\obj\Debug\netcoreapp2.1\BackendApiProject.AssemblyInfo.cs
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\obj\Debug\netcoreapp2.1\BackendApiProject.RazorTargetAssemblyInfo.cache
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\bin\Debug\netcoreapp2.1\BackendApiProject.pdb
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\obj\Debug\netcoreapp2.1\BackendApiProject.dll
+C:\Users\rcpd2153\source\repos\BackendApiProject\BackendApiProject\obj\Debug\netcoreapp2.1\BackendApiProject.pdb
