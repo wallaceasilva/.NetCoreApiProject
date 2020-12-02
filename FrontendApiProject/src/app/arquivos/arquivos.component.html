@@ -1,0 +1,88 @@
+<div class="ui-g">
+    <p-toast></p-toast>
+    <p-confirmDialog header="Confirmação" acceptLabel="Sim" rejectLabel="Não" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <p-panel header="Lista de Arquivos" [style]="{width: '70%', margin: '0 auto'}">
+        <div style="margin-bottom: 20px;">
+            <p-menubar [model]="menuItens"></p-menubar>
+        </div>
+        <p-table [value]="arquivos" [columns]="colunas" [responsive]="true" selectionMode="single" [(selection)]="arquivoSelecionado" dataKey="id" [paginator]="true" [rows]="10">
+            <ng-template pTemplate="header">
+                <th *ngFor="let col of colunas" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                </th>
+            </ng-template>
+            <ng-template pTemplate="body" let-arquivo let-columns="columns">
+                <tr [pSelectableRow]="arquivo">
+                    <td style="text-align: center">{{arquivo.id}}</td>
+                    <td style="text-align: center">{{arquivo.nome}}</td>
+                    <td style="text-align: center">{{arquivo.dtCriacao | date: 'dd/MM/yyyy HH:mm' }}</td>
+                    <td style="text-align: center"> <button type="button" pButton icon=" pi pi-fw pi-download" (click)="onDownload(arquivo.id, arquivo.nome)" label="Download" ></button> </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-panel>
+
+    <p-dialog header="Novo Arquivo" [responsive]="true" [style]="{width: '600px'}" [(visible)]="displayDialogNew" [modal]="true" >
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12">
+                <div class="ui-g-4">
+                    <label for="file">Arquivo</label>
+                </div>
+                <div class="ui-g-8">
+                    <p-fileUpload name="upNovo[]" (onSelect)="onUpload($event)" accept=".txt,.log" [showUploadButton]="false" (onRemove)="onRemove()" (onClear)="onRemove()">
+                        <!--<ng-template pTemplate="content">
+                            <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                            </ul>
+                        </ng-template>-->
+                    </p-fileUpload>
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <div class="ui-dialog-buttonpane ui-helper-clearfix" >
+                <button type="button" pButton icon="pi pi-check" (click)="salve()" id="btnSalvar" label="Salvar" [disabled]="uploadedFiles.length==0"></button>
+            </div>
+        </p-footer>
+    </p-dialog>
+
+    <p-dialog header="Alterar Arquivo" [responsive]="true" [style]="{width: '1000px'}" [(visible)]="displayDialogEdit" [modal]="true">
+        <table width="90%" align="center">
+            <tr>
+                <td width="20%"><b>ID</b></td>
+                <td width="30%"><b>Nome do Arquivo</b></td>
+                <td width="30%"><b>Data da Inclusão</b></td>
+                <td width="20%"><b>Arquivo</b></td>
+            </tr>
+            <tr>
+                <td>{{arquivoSelecionado.id}}</td>
+                <td>{{arquivoSelecionado.nome}}</td>
+                <td>{{arquivoSelecionado.dtCriacao | date: 'dd/MM/yyyy HH:mm'}}</td>
+                <td style="text-align: center"> <button type="button" pButton icon=" pi pi-fw pi-download" (click)="onDownload(arquivoSelecionado.id, arquivoSelecionado.nome)" label="Download" ></button> </td>
+            </tr>
+        </table>
+        <br /><br /><br />
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12">
+                <div class="ui-g-4" >
+                    <label for="file">Escolha o novo arquivo</label>
+                </div>
+                <div class="ui-g-8">
+                    <p-fileUpload name="upEdit[]" (onSelect)="onUpload($event)" accept=".txt,.log" [showUploadButton]="false" (onRemove)="onRemove()" (onClear)="onRemove()">
+                        <!--<ng-template pTemplate="content">
+                            <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                            </ul>
+                        </ng-template>-->
+                    </p-fileUpload>
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <div class="ui-dialog-buttonpane ui-helper-clearfix" >
+                <button type="button" pButton icon="pi pi-check" (click)="edit()" id="btnAlterar" label="Alterar" [disabled]="uploadedFiles.length==0"></button>
+            </div>
+        </p-footer>
+    </p-dialog>
+</div>
