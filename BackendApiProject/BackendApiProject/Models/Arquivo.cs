@@ -10,6 +10,7 @@ namespace BackendApiProject.Models
     [Table("arquivo")]
     public class Arquivo
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
 
@@ -24,6 +25,5 @@ namespace BackendApiProject.Models
         [Required]
         [Column(TypeName = "bytea")]
         public byte[] File { get; set; }
-
     }
 }
