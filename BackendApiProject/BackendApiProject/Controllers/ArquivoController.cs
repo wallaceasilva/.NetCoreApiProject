@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BackendApiProject.Models;
 using BackendApiProject.Models.Interfaces;
-using System.Text;
-using System.IO;
 
 namespace BackendApiProject.Controllers
 {
@@ -30,6 +28,15 @@ namespace BackendApiProject.Controllers
         public async Task<ActionResult<IEnumerable<Arquivo>>> GetArquivos()
         {
             return await _context.Arquivos.ToListAsync();
+        }
+
+        // GET: api/Arquivo/file
+        [Route("file/{id}")]
+        public async Task<ActionResult> GetDownloadArquivo([FromRoute] int id)
+        {
+            var arquivo = await _context.Arquivos.FindAsync(id);
+
+            return File(arquivo.File, "application/octet-stream", arquivo.Nome);
         }
 
         // GET: api/Arquivo/5
@@ -99,6 +106,24 @@ namespace BackendApiProject.Controllers
             await _context.SaveChangesAsync();*/
 
             return CreatedAtAction("GetArquivo", new { id = arquivo.Id }, arquivo);
+        }
+
+        // POST: api/Arquivo
+        [HttpPost]
+        [Route("batch/")]
+        public async Task<ActionResult<IEnumerable<Arquivo>>> BatchArquivo([FromBody] Arquivo[] arquivos)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            for(int i = 0; i < arquivos.Length; i++) {
+                _dRep.Add(arquivos[i]);
+                var vCommit = await _dRep.SaveAsync(arquivos[i]);
+            }
+
+            return CreatedAtAction("GetArquivo", new { id = arquivos[0].Id }, arquivos);
         }
 
         // DELETE: api/Arquivo/5
